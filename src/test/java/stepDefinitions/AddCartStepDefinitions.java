@@ -1,5 +1,7 @@
 package stepDefinitions;
 
+import org.testng.Assert;
+import org.testng.asserts.Assertion;
 import pages.BaseMethods;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -8,21 +10,6 @@ import util.DriverFactory;
 
 public class AddCartStepDefinitions {
     BaseMethods baseMethods = new BaseMethods(DriverFactory.getDriver());
-
-    @When("Arama kismina cicekli elbise yaz")
-    public void aramaKisminaCicekliElbiseYaz() {
-        baseMethods.typeSearchTerm("çiçekli elbise");
-    }
-
-    @When("Onerilen arama sonuclarindandan ilkine tikla")
-    public void onerilenAramaSonuclarindandanIlkineTikla() {
-        baseMethods.clickSuggestedSearchTerm(3);
-    }
-
-    @When("Arama sonucundaki urunlerden ilk urune tikla")
-    public void aramaSonucundakiUrunlerdenIlkUruneTikla() {
-        baseMethods.clickProduct();
-    }
 
     @When("Sepete ekle butonuna tikla")
     public void sepeteEkleButonunaTikla() {
@@ -36,6 +23,6 @@ public class AddCartStepDefinitions {
 
     @And("Urun gozukuyormu kontrol et")
     public void urunGozukuyormuKontrolEt() {
-        baseMethods.checkProductAtCart();
+        Assert.assertTrue(baseMethods.checkProductAtCart());
     }
 }

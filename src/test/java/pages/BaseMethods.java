@@ -26,6 +26,8 @@ public class BaseMethods {
     By productLayout = MobileBy.id("trendyol.com:id/layoutCartProduct");
     By guidePopup = MobileBy.id("trendyol.com:id/tooltipView");
     By accountTab = MobileBy.id("trendyol.com:id/tab_account");
+    By homeTab = MobileBy.id("trendyol.com:id/tab_home");
+    By favroiteTab = MobileBy.id("trendyol.com:id/tab_favorites");
     By loginOrSignUpButton = MobileBy.AndroidUIAutomator("text(\"Giriş Yap / Üye Ol\")");
     By emailTextField = MobileBy.id("trendyol.com:id/editTextEmail");
     By passwordTextField = MobileBy.id("trendyol.com:id/editTextPassword");
@@ -33,9 +35,12 @@ public class BaseMethods {
     By loginButton = MobileBy.id("trendyol.com:id/buttonLogin");
     By loginPopupCloseButton = MobileBy.AndroidUIAutomator("resourceId(\"trendyol.com:id/imageViewTopArrow\")");
     By emailTextView = MobileBy.id("trendyol.com:id/textViewEmail");
-    By genderSelectionDissmisButton = MobileBy.AndroidUIAutomator("resourceId(\"GenderSelectionDismissButton\")");
+    By genderSelectionDismissButton = MobileBy.AndroidUIAutomator("resourceId(\"GenderSelectionDismissButton\")");
     String email = "apesbleb@inctart.com";
     String password = "A123456789a";
+    By changeLanguageDismiss = MobileBy.id("trendyol.com:id/touch_outside");
+    By favoriteButton = MobileBy.id("trendyol.com:id/favorite_product_detail");
+    By favoritedProduct = MobileBy.id("trendyol.com:id/favoriteCardView");
 
     public BaseMethods(AppiumDriver driver) {
         this.driver = driver;
@@ -56,67 +61,88 @@ public class BaseMethods {
         }
     }
 
-    public void allowNotification(){
+    public void allowNotification() {
         elementHelper.clickElement(notifAllowButton);
     }
 
-    public void typeSearchTerm(String text){
+    public void typeSearchTerm(String text) {
         elementHelper.clickElement(searchBox);
         elementHelper.sendKey(searchBox, text);
     }
 
-    public void clickSuggestedSearchTerm(int index){
+    public void clickSuggestedSearchTerm(int index) {
         List<WebElement> suggestedSearchTerms = driver.findElements(suggestedSearchTerm);
         suggestedSearchTerms.get(index).click();
     }
 
-    public void clickProduct(){
+    public void clickProduct() {
         List<WebElement> productCars = driver.findElements(productCard);
         productCars.get(0).click();
     }
 
-    public void clickAddCart(){
+    public void clickAddCart() {
         elementHelper.clickElement(addCartButton);
         elementHelper.clickElement(addCartButton);
     }
 
-    public void isCartPage(){
-        if(elementHelper.presenceElement(guidePopup).isDisplayed()){
+    public void isCartPage() {
+        if (elementHelper.presenceElement(guidePopup).isDisplayed()) {
             elementHelper.clickElement(guidePopup);
         }
         elementHelper.presenceElement(cartPageTitle);
     }
 
-    public void checkProductAtCart(){
-        elementHelper.isDisplayed(productLayout);
+    public Boolean checkProductAtCart() {
+        return elementHelper.isDisplayed(productLayout);
     }
 
-    public void clickAccountTab(){
+    public void clickAccountTab() {
         elementHelper.clickElement(accountTab);
     }
 
-    public void clickSigninOrSignup(){
+    public void clickSigninOrSignup() {
         elementHelper.clickElement(loginOrSignUpButton);
     }
 
-    public void typeEmail(){
+    public void typeEmail() {
         elementHelper.sendKey(emailTextField, email);
         elementHelper.clickElement(continueButton);
 
     }
 
-    public void typePassword(){
+    public void typePassword() {
         elementHelper.sendKey(passwordTextField, password);
     }
 
-    public void clickLogin(){
+    public void clickLogin() {
         elementHelper.clickElement(loginButton);
     }
 
     public Boolean isLogin() throws InterruptedException {
         elementHelper.clickElement(loginPopupCloseButton);
-        elementHelper.clickElement(genderSelectionDissmisButton);
+        elementHelper.clickElement(genderSelectionDismissButton);
         return elementHelper.presenceElement(emailTextView).getText().equals(email);
-        }
     }
+
+    public void clickHomeTab(){
+        elementHelper.clickElement(homeTab);
+        if(elementHelper.isDisplayed(loginPopupCloseButton)){
+            elementHelper.clickElement(loginPopupCloseButton);
+        }
+        elementHelper.clickElement(changeLanguageDismiss);
+    }
+
+    public void clickFavoriteButton(){
+        elementHelper.clickElement(favoriteButton);
+        driver.navigate().back();
+    }
+
+    public void clickFavoriteTab(){
+        elementHelper.clickElement(favroiteTab);
+    }
+
+    public boolean checkProductAtFavorites(){
+        return elementHelper.findElement(favoritedProduct).isDisplayed();
+    }
+}
 

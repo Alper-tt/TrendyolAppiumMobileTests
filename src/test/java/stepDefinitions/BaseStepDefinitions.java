@@ -16,4 +16,19 @@ public class BaseStepDefinitions {
     public void bildirimIzinPopupIndanAllowSec() {
         baseMethods.allowNotification();
     }
+
+    @When("Arama kismina yazlik tisort yaz")
+    public void aramaKisminaCicekliElbiseYaz() {
+        baseMethods.typeSearchTerm("yazlik tisort");
+    }
+
+    @When("Onerilen arama sonuclarindandan ilkine tikla")
+    public void onerilenAramaSonuclarindandanIlkineTikla() {
+        baseMethods.clickSuggestedSearchTerm(3);
+    }
+
+    @When("Arama sonucundaki urunlerden ilk urune tikla")
+    public void aramaSonucundakiUrunlerdenIlkUruneTikla() {
+        baseMethods.clickProduct();
+    }
 }
