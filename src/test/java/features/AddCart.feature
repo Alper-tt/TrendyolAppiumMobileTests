@@ -1,5 +1,6 @@
-Feature: Ürün sepete eklenir
-  Scenario: Urun aramasi yapilir, urun sepete eklenir ve sepet kontrol edilir
+@AddCart
+Feature: Urun sepete eklenir
+  Scenario: Urun aramasi yapilir, urune gidilir, urun sepete eklenir ve sepet kontrol edilir
     When Cinsiyet olarak kadin sec
     When Bildirim izin popup'indan allow sec
     When Arama kismina cicekli elbise yaz

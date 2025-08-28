@@ -3,16 +3,14 @@ package pages;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.cucumber.java.PendingException;
-import org.apache.commons.logging.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.ElementHelper;
 
 import java.util.List;
-import java.util.logging.LogManager;
 
-public class TrendyolPage {
+public class BaseMethods {
     WebDriverWait driverWait;
     AppiumDriver driver;
     ElementHelper elementHelper;
@@ -27,9 +25,19 @@ public class TrendyolPage {
     By cartPageTitle = MobileBy.id("trendyol.com:id/textViewCartTitle");
     By productLayout = MobileBy.id("trendyol.com:id/layoutCartProduct");
     By guidePopup = MobileBy.id("trendyol.com:id/tooltipView");
-    By guideVerifiedSeller = MobileBy.AndroidUIAutomator("resourceId(\"trendyol.com:id/verified_seller_badge_onboarding_view\")");
+    By accountTab = MobileBy.id("trendyol.com:id/tab_account");
+    By loginOrSignUpButton = MobileBy.AndroidUIAutomator("text(\"Giriş Yap / Üye Ol\")");
+    By emailTextField = MobileBy.id("trendyol.com:id/editTextEmail");
+    By passwordTextField = MobileBy.id("trendyol.com:id/editTextPassword");
+    By continueButton = MobileBy.id("trendyol.com:id/buttonContinue");
+    By loginButton = MobileBy.id("trendyol.com:id/buttonLogin");
+    By loginPopupCloseButton = MobileBy.AndroidUIAutomator("resourceId(\"trendyol.com:id/imageViewTopArrow\")");
+    By emailTextView = MobileBy.id("trendyol.com:id/textViewEmail");
+    By genderSelectionDissmisButton = MobileBy.AndroidUIAutomator("resourceId(\"GenderSelectionDismissButton\")");
+    String email = "apesbleb@inctart.com";
+    String password = "A123456789a";
 
-    public TrendyolPage(AppiumDriver driver) {
+    public BaseMethods(AppiumDriver driver) {
         this.driver = driver;
         this.driverWait = new WebDriverWait(driver, 10);
         this.elementHelper = new ElementHelper(driver);
@@ -78,7 +86,37 @@ public class TrendyolPage {
         }
         elementHelper.presenceElement(cartPageTitle);
     }
+
     public void checkProductAtCart(){
         elementHelper.isDisplayed(productLayout);
     }
-}
+
+    public void clickAccountTab(){
+        elementHelper.clickElement(accountTab);
+    }
+
+    public void clickSigninOrSignup(){
+        elementHelper.clickElement(loginOrSignUpButton);
+    }
+
+    public void typeEmail(){
+        elementHelper.sendKey(emailTextField, email);
+        elementHelper.clickElement(continueButton);
+
+    }
+
+    public void typePassword(){
+        elementHelper.sendKey(passwordTextField, password);
+    }
+
+    public void clickLogin(){
+        elementHelper.clickElement(loginButton);
+    }
+
+    public Boolean isLogin() throws InterruptedException {
+        elementHelper.clickElement(loginPopupCloseButton);
+        elementHelper.clickElement(genderSelectionDissmisButton);
+        return elementHelper.presenceElement(emailTextView).getText().equals(email);
+        }
+    }
+
