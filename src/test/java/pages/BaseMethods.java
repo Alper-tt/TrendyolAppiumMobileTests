@@ -41,6 +41,8 @@ public class BaseMethods {
     By changeLanguageDismiss = MobileBy.id("trendyol.com:id/touch_outside");
     By favoriteButton = MobileBy.id("trendyol.com:id/favorite_product_detail");
     By favoritedProduct = MobileBy.id("trendyol.com:id/favoriteCardView");
+    By followButton = MobileBy.id("trendyol.com:id/buttonFollow");
+    By storeSearchResult = MobileBy.id("trendyol.com:id/textViewSearchSuggestionType");
 
     public BaseMethods(AppiumDriver driver) {
         this.driver = driver;
@@ -143,6 +145,18 @@ public class BaseMethods {
 
     public boolean checkProductAtFavorites(){
         return elementHelper.findElement(favoritedProduct).isDisplayed();
+    }
+
+    public void clickStoreAtSearchResults() {
+        elementHelper.clickElement(storeSearchResult);
+    }
+
+    public void clickFollowButton(){
+        elementHelper.clickElement(followButton);
+    }
+
+    public boolean checkFollowStatus(){
+        return elementHelper.findElement(followButton).getText().equals("Takip Ediliyor");
     }
 }
 

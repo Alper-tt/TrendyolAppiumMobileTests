@@ -17,9 +17,9 @@ public class BaseStepDefinitions {
         baseMethods.allowNotification();
     }
 
-    @When("Arama kismina yazlik tisort yaz")
-    public void aramaKisminaCicekliElbiseYaz() {
-        baseMethods.typeSearchTerm("yazlik tisort");
+    @When("Arama kismina {string} yaz")
+    public void aramaKisminaAramaTerimini(String text) {
+        baseMethods.typeSearchTerm(text);
     }
 
     @When("Onerilen arama sonuclarindandan ilkine tikla")

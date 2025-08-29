@@ -1,7 +1,6 @@
 package stepDefinitions;
 
 import org.testng.Assert;
-import org.testng.asserts.Assertion;
 import pages.BaseMethods;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;

@@ -1,6 +1,5 @@
 @AddFavorite
 Feature: Urun favoriye eklenir
-
   Background:
     When Cinsiyet olarak kadin sec
     When Bildirim izin popup'indan allow sec
@@ -13,7 +12,7 @@ Feature: Urun favoriye eklenir
 
   Scenario: Urun aramasi yapilir, urune gidilir, urun favoriye eklenir ve favorilenen urunler kontrol edilir
     When Anasayfa'ya git
-    When Arama kismina yazlik tisort yaz
+    When Arama kismina "cicekli elbise" yaz
     When Onerilen arama sonuclarindandan ilkine tikla
     When Arama sonucundaki urunlerden ilk urune tikla
     When Urunu favoriye ekle
